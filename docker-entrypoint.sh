@@ -1,6 +1,8 @@
 #!/bin/sh
 
-if [ "$SSH_ENABLED" = true ]; then
+#SSH_ENABLED="true"
+
+if [ "${SSH_ENABLED}" = true ]; then
   if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
     # generate fresh rsa key
     ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
@@ -19,5 +21,7 @@ if [ "$SSH_ENABLED" = true ]; then
 
   env | grep '_\|PATH' | awk '{print "export " $0}' >> /root/.profile
 fi
+
+sleep 50m
 
 exec "$@"
